@@ -22,8 +22,8 @@ public class FrmInicio extends javax.swing.JFrame {
      * Creates new form frmPrincipal
      */
     public FrmInicio(IClientesDAO clientesDAO) {
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
-//        this.setIconImage(icon.getImage());
+        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("INICIO");
         this.clientesDAO = clientesDAO;
         initComponents();
@@ -47,6 +47,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -71,7 +72,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 80, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        jButton2.setText("Continuar sin cuenta");
+        jButton2.setText("Hacer retiro sin cuenta");
         jButton2.setBorderPainted(false);
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 160, 30));
 
@@ -82,10 +83,13 @@ public class FrmInicio extends javax.swing.JFrame {
                 btnRegistrarseActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, -1, -1));
+        jPanel1.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 30));
 
         jLabel4.setText("¿No estás registrado?");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/potros-itson.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,13 +111,11 @@ public class FrmInicio extends javax.swing.JFrame {
         registro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
