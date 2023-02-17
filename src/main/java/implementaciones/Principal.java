@@ -24,7 +24,7 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IConexionBD generadorConexiones = new ConexionBD("jdbc:mysql://localhost/banco_potros", "root", "jordan02MAR");
+        IConexionBD generadorConexiones = new ConexionBD("jdbc:mysql://localhost/banco_potros", "root", "magditabonita2003."/*"jordan02MAR"*/ );
 //        IClientesDAO clientesDAO = new ClientesDAO(generadorConexiones);
         IDireccionesClientesDAO direccionesClientesDAO = new DireccionesClientesDAO(generadorConexiones);
 //        

@@ -238,8 +238,8 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        Integer idDireccion = guardarDireccion();
-        guardarCliente(idDireccion);
+     //   Integer idDireccion = guardarDireccion();
+        guardarCliente(guardarDireccion());
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarActionPerformed
