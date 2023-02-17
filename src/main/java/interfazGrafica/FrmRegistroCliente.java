@@ -251,6 +251,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         txtCalle.setText(null);
         txtNumero.setText(null);
         txtColonia.setText(null);
+        txtFechaNacimiento.setCalendar(null);
     }//GEN-LAST:event_btnVaciarActionPerformed
 
 

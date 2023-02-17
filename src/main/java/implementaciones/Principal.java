@@ -25,17 +25,17 @@ public class Principal {
      */
     public static void main(String[] args) {
         IConexionBD generadorConexiones = new ConexionBD("jdbc:mysql://localhost/banco_potros", "root", "magditabonita2003."/*"jordan02MAR"*/ );
-//        IClientesDAO clientesDAO = new ClientesDAO(generadorConexiones);
+        IClientesDAO clientesDAO = new ClientesDAO(generadorConexiones);
         IDireccionesClientesDAO direccionesClientesDAO = new DireccionesClientesDAO(generadorConexiones);
-//        
-//        FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO);
-//        inicio.setVisible(true);
-        try{
-        DireccionesClientes direccion = new DireccionesClientes("leuze","1032","Cedros 2");
-        direccionesClientesDAO.insertar(direccion);
-        } catch (PersistenciaException e){
-            
-        }
+        
+        FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO);
+        inicio.setVisible(true);
+//        try{
+//        DireccionesClientes direccion = new DireccionesClientes("leuze","1032","Cedros 2");
+//        direccionesClientesDAO.insertar(direccion);
+//        } catch (PersistenciaException e){
+//            
+//        }
     }
     
 }
