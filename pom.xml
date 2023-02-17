@@ -33,6 +33,7 @@
                <artifactId>AbsoluteLayout</artifactId>
                <version>RELEASE160</version>
           </dependency>
+          
      </dependencies>
 
     <properties>

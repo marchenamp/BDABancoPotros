@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
  * @author march
  */
 public class FrmInicio extends javax.swing.JFrame {
-    
+
     private static final Logger LOG = Logger.getLogger(FrmInicio.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
     private String usuario;
     private String contraseña;
-    
+
     /**
      * Creates new form frmPrincipal
      */
@@ -34,31 +34,33 @@ public class FrmInicio extends javax.swing.JFrame {
         this.clientesDAO = clientesDAO;
         this.direccionesClientesDAO = direccionesClientesDAO;
         initComponents();
+        this.lblOcultar.setVisible(false);
     }
-    
-    public void consultarFormulario(){
+
+    public void consultarFormulario() {
         usuario = this.txtUsuario.getText();
         contraseña = this.txtContraseña.getText();
     }
-    
-    public boolean verificarExistencia(){
+
+    public boolean verificarExistencia() {
         this.consultarFormulario();
         Cliente validacionExistencia = this.clientesDAO.consultarExistencia(usuario);
-        if (validacionExistencia != null){
+        if (validacionExistencia != null) {
             return true;
         } else {
             return false;
         }
     }
-    
-    public boolean verificarContraseña(){
+
+    public boolean verificarContraseña() {
         Cliente cliente = clientesDAO.consultarExistencia(usuario);
-        if(contraseña.equals(cliente.getContraseña())){
+        if (contraseña.equals(cliente.getContraseña())) {
             return true;
         } else {
             return false;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +79,9 @@ public class FrmInicio extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblOcultar = new javax.swing.JLabel();
+        lblVer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -88,7 +93,7 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setText("Usuario:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
@@ -122,6 +127,25 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel4.setText("¿No estás registrado?");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, -1, -1));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        lblOcultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ocultar.png"))); // NOI18N
+        lblOcultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOcultarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+
+        lblVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver.png"))); // NOI18N
+        lblVer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVerMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,35 +168,52 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(this.verificarExistencia()){
-            if(this.verificarContraseña()){
+        if (this.verificarExistencia()) {
+            if (this.verificarContraseña()) {
                 FrmCuentas cuentas = new FrmCuentas();
-            cuentas.setVisible(true);
-            this.setVisible(false);
+                cuentas.setVisible(true);
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(
-                this,
-                "La contraseña está incorrecta.",
-                "Información",
-                JOptionPane.INFORMATION_MESSAGE);
+                        this,
+                        "La contraseña está incorrecta.",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(
-                this,
-                "El cliente ingresado no existe.",
-                "Información",
-                JOptionPane.INFORMATION_MESSAGE);
+                    this,
+                    "El cliente ingresado no existe.",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void lblOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOcultarMouseClicked
+        // TODO add your handling code here:
+        lblVer.setVisible(true);
+        lblOcultar.setVisible(false);
+        txtContraseña.setEchoChar('•');
+    }//GEN-LAST:event_lblOcultarMouseClicked
+
+    private void lblVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerMouseClicked
+        // TODO add your handling code here:
+        lblVer.setVisible(false);
+        lblOcultar.setVisible(true);
+        txtContraseña.setEchoChar((char) 0);
+    }//GEN-LAST:event_lblVerMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblOcultar;
+    private javax.swing.JLabel lblVer;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
