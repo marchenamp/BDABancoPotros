@@ -23,6 +23,13 @@ public class DireccionesClientes {
         this.colonia = colonia;
     }
 
+    public DireccionesClientes(Integer idDireccion, String calle, String numero, String colonia) {
+        this.idDireccion = idDireccion;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+    }
+    
     public Integer getIdDireccion() {
         return idDireccion;
     }

@@ -6,8 +6,10 @@
 package interfazGrafica;
 
 import dominio.Cliente;
+import dominio.DireccionesClientes;
 import excepciones.PersistenciaException;
 import interfaces.IClientesDAO;
+import interfaces.IDireccionesClientesDAO;
 import java.sql.Date;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,35 +24,54 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
 
     private static final Logger LOG = Logger.getLogger(FrmRegistroCliente.class.getName());
     private final IClientesDAO clientesDAO;
+    private final IDireccionesClientesDAO direccionesClientesDAO;
 
     /**
      * Creates new form FrmRegistroCliente
      */
-    public FrmRegistroCliente(IClientesDAO clientesDAO) {
-        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
-        this.setIconImage(icon.getImage());
+    public FrmRegistroCliente(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO) {
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
+//        this.setIconImage(icon.getImage());
         this.setTitle("REGISTRO");
         this.clientesDAO = clientesDAO;
+        this.direccionesClientesDAO = direccionesClientesDAO;
         initComponents();
     }
 
-    private Cliente consultarFormulario() {
+    private Cliente consultarFormularioCliente(Integer idDireccion) {
         String usuario = this.txtUsuario.getText();
         String nombre = this.txtNombre.getText();
         String apellidoPaterno = this.txtApellidoPaterno.getText();
         String apellidoMaterno = this.txtApellidoMaterno.getText();
         String fecha = ((JTextField) this.txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
         Date fechaNacimiento = Date.valueOf(fecha);
-        fechaNacimiento.toLocalDate();
-        Integer edad = Integer.valueOf(this.txtEdad.getText());
-        Integer idDireccion = 1;
+        Integer edad = 0;
         Cliente cliente = new Cliente(usuario, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
         return cliente;
     }
-
-    private void guardar() {
+    
+    private DireccionesClientes consultarFormularioDireccion(){
+        String calle = this.txtCalle.getText();
+        String numero = this.txtNumero.getText();
+        String colonia = this.txtColonia.getText();
+        DireccionesClientes direccionCliente = new DireccionesClientes(calle,numero,colonia);
+        return direccionCliente;
+    }
+    
+    private Integer guardarDireccion() {
         try {
-            Cliente cliente = this.consultarFormulario();
+            DireccionesClientes direccionCliente = this.consultarFormularioDireccion();
+            Integer idDireccion = this.direccionesClientesDAO.insertar(direccionCliente);
+            return idDireccion;
+        } catch (PersistenciaException e) {
+            this.mostrarMensajeErrorAlGuardado();
+        }
+        return null;
+    }
+    
+    private void guardarCliente(Integer idDireccion) {
+        try {
+            Cliente cliente = this.consultarFormularioCliente(idDireccion);
             Cliente clienteGuardado = this.clientesDAO.insertar(cliente);
             this.mostrarMensajeClienteGuardado(cliente);
         } catch (PersistenciaException e) {
@@ -88,18 +109,14 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtApellidoPaterno = new javax.swing.JTextField();
         txtApellidoMaterno = new javax.swing.JTextField();
-        txtEdad = new javax.swing.JTextField();
         btnRegistrarse = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -108,6 +125,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         txtNumero = new javax.swing.JTextField();
         txtCalle = new javax.swing.JTextField();
         btnVaciar = new javax.swing.JButton();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -133,10 +151,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jLabel5.setText("Fecha de Nacimiento:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Edad:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 255));
         jLabel7.setText("DIRECCIÓN");
@@ -150,10 +164,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
 
         txtApellidoMaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 210, -1));
-
-        txtEdad.setEditable(false);
-        txtEdad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 40, -1));
 
         btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRegistrarse.setText("Registrarse");
@@ -174,13 +184,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 210, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/potros-itson-chico.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("años");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 255));
@@ -209,7 +212,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jPanel1.add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 210, -1));
 
         btnVaciar.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        btnVaciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/vaciar24.png"))); // NOI18N
         btnVaciar.setText("Vaciar");
         btnVaciar.setBorderPainted(false);
         btnVaciar.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +220,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnVaciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, -1, -1));
+        jPanel1.add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,7 +238,8 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        guardar();
+        Integer idDireccion = guardarDireccion();
+        guardarCliente(idDireccion);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarActionPerformed
@@ -244,7 +248,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         txtNombre.setText(null);
         txtApellidoPaterno.setText(null);
         txtApellidoMaterno.setText(null);
-        txtEdad.setText(null);
         txtCalle.setText(null);
         txtNumero.setText(null);
         txtColonia.setText(null);
@@ -255,7 +258,6 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVaciar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -264,16 +266,14 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtEdad;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtUsuario;

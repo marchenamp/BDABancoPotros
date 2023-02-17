@@ -19,8 +19,8 @@ public class FrmBanco extends javax.swing.JFrame {
      * Creates new form FrmBanco
      */
     public FrmBanco() {
-        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
-        this.setIconImage(icon.getImage());
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
+//        this.setIconImage(icon.getImage());
         this.setTitle("BANCO POTROS");
         initComponents();
     }
@@ -47,8 +47,6 @@ public class FrmBanco extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -76,17 +74,14 @@ public class FrmBanco extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/transferir.png"))); // NOI18N
         jButton1.setText("Transferir");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 150, -1));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/retirar.png"))); // NOI18N
         jButton2.setText("Retirar");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 150, -1));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/Movimientos.png"))); // NOI18N
         jButton3.setText("Ver movimientos");
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 180, -1));
 
@@ -117,12 +112,6 @@ public class FrmBanco extends javax.swing.JFrame {
         jLabel8.setText("Cuenta");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/potros-itson-chico.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/tarjeta-bancaria.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 483, 605));
 
         pack();
@@ -136,12 +125,10 @@ public class FrmBanco extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

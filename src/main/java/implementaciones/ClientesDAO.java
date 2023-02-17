@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class ClientesDAO implements IClientesDAO{
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD generadorConexiones;
-
+    
     public ClientesDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
@@ -58,7 +58,7 @@ public class ClientesDAO implements IClientesDAO{
             return null;
         }
     }
-
+    
     @Override
     public Cliente insertar(Cliente cliente) throws PersistenciaException {
         String codigoSQL = "insert into clientes(usuario,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion) "
