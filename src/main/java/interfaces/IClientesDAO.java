@@ -14,6 +14,7 @@ import excepciones.PersistenciaException;
  */
 public interface IClientesDAO {
     Cliente consultar(Integer idCliente);
+    Cliente consultarExistencia(String usuario);
     Cliente insertar(Cliente cliente) throws PersistenciaException;
     Cliente eliminar(Integer id);
 }

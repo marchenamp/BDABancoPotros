@@ -5,10 +5,12 @@
  */
 package interfazGrafica;
 
+import dominio.Cliente;
 import interfaces.IClientesDAO;
 import interfaces.IDireccionesClientesDAO;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +21,8 @@ public class FrmInicio extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(FrmInicio.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
+    private String usuario;
+    private String contraseña;
     
     /**
      * Creates new form frmPrincipal
@@ -31,7 +35,30 @@ public class FrmInicio extends javax.swing.JFrame {
         this.direccionesClientesDAO = direccionesClientesDAO;
         initComponents();
     }
-
+    
+    public void consultarFormulario(){
+        usuario = this.txtUsuario.getText();
+        contraseña = this.txtContraseña.getText();
+    }
+    
+    public boolean verificarExistencia(){
+        this.consultarFormulario();
+        Cliente validacionExistencia = this.clientesDAO.consultarExistencia(usuario);
+        if (validacionExistencia != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean verificarContraseña(){
+        Cliente cliente = clientesDAO.consultarExistencia(usuario);
+        if(contraseña.equals(cliente.getContraseña())){
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,9 +71,9 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtContraseña = new javax.swing.JPasswordField();
+        btnEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -66,12 +93,17 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 130, -1));
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 130, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 130, -1));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 130, -1));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Entrar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 100, 30));
+        btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 100, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jButton2.setText("Hacer retiro sin cuenta");
@@ -110,15 +142,38 @@ public class FrmInicio extends javax.swing.JFrame {
         registro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        if(this.verificarExistencia()){
+            if(this.verificarContraseña()){
+                FrmCuentas cuentas = new FrmCuentas();
+            cuentas.setVisible(true);
+            this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(
+                this,
+                "La contraseña está incorrecta.",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "El cliente ingresado no existe.",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRegistrarse;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

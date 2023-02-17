@@ -11,6 +11,8 @@ import excepciones.PersistenciaException;
 import interfaces.IClientesDAO;
 import interfaces.IDireccionesClientesDAO;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -40,13 +42,17 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
 
     private Cliente consultarFormularioCliente(Integer idDireccion) {
         String usuario = this.txtUsuario.getText();
+        String contraseña = this.txtContraseña.getText();
         String nombre = this.txtNombre.getText();
         String apellidoPaterno = this.txtApellidoPaterno.getText();
         String apellidoMaterno = this.txtApellidoMaterno.getText();
         String fecha = ((JTextField) this.txtFechaNacimiento.getDateEditor().getUiComponent()).getText();
         Date fechaNacimiento = Date.valueOf(fecha);
-        Integer edad = 0;
-        Cliente cliente = new Cliente(usuario, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
+        LocalDate nacimiento = fechaNacimiento.toLocalDate();
+        LocalDate fechaActual = LocalDate.now();
+        Period periodo = Period.between(fechaActual, nacimiento);
+        Integer edad = Math.abs(periodo.getYears());
+        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
         return cliente;
     }
     
@@ -72,8 +78,17 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private void guardarCliente(Integer idDireccion) {
         try {
             Cliente cliente = this.consultarFormularioCliente(idDireccion);
-            Cliente clienteGuardado = this.clientesDAO.insertar(cliente);
-            this.mostrarMensajeClienteGuardado(cliente);
+            if(cliente.getEdad() > 12){
+                Cliente clienteGuardado = this.clientesDAO.insertar(cliente);
+                this.mostrarMensajeClienteGuardado(clienteGuardado);
+            } else {
+                JOptionPane.showMessageDialog(
+                this,
+                "Lo sentimos! No cuentas con la edad suficiente.",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         } catch (PersistenciaException e) {
             this.mostrarMensajeErrorAlGuardado();
         }
@@ -126,6 +141,8 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         txtCalle = new javax.swing.JTextField();
         btnVaciar = new javax.swing.JButton();
         txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        txtContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -220,7 +237,14 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnVaciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, -1, -1));
+
+        txtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
         jPanel1.add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 210, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel1.setText("Contraseña:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 210, -1, -1));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,6 +283,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVaciar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -274,6 +299,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtColonia;
+    private javax.swing.JPasswordField txtContraseña;
     private com.toedter.calendar.JDateChooser txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumero;

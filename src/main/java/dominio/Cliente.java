@@ -23,9 +23,11 @@ public class Cliente {
     private Date fechaNacimiento;
     private Integer edad;
     private Integer idDireccion;
+    private String contraseña;
 
-    public Cliente(String usuario, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, Integer edad, Integer idDireccion) {
+    public Cliente(String usuario, String contraseña, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, Integer edad, Integer idDireccion) {
         this.usuario = usuario;
+        this.contraseña = contraseña;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -34,9 +36,10 @@ public class Cliente {
         this.idDireccion = idDireccion;
     }
 
-    public Cliente(Integer idCliente, String usuario, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, Integer edad, Integer idDireccion) {
+    public Cliente(Integer idCliente, String usuario, String contraseña, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, Integer edad, Integer idDireccion) {
         this.idCliente = idCliente;
         this.usuario = usuario;
+        this.contraseña = contraseña;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -109,6 +112,14 @@ public class Cliente {
         this.idDireccion = idDireccion;
     }
 
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

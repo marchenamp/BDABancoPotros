@@ -32,7 +32,7 @@ public class ClientesDAO implements IClientesDAO{
     
     @Override
     public Cliente consultar(Integer idCliente) {
-        String codigoSQL = "select usuario,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion "
+        String codigoSQL = "select usuario,contraseña,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion "
                 + "from clientes "
                 + "where IDcliente = ?";
         try (Connection conexion = generadorConexiones.crearConexion();
@@ -44,13 +44,44 @@ public class ClientesDAO implements IClientesDAO{
             //Si se encontró el cliente...
             if (resultado.next()) {
                 String usuario = resultado.getString("usuario");
+                String contraseña = resultado.getString("contraseña");
                 String nombre = resultado.getString("nombre");
                 String apellidoPaterno = resultado.getString("apellidoPaterno");
                 String apellidoMaterno = resultado.getString("apellidoMaterno");
                 Date fechaNacimiento = resultado.getDate("fechaNacimiento");
                 Integer edad = resultado.getInt("edad");
                 Integer idDireccion = resultado.getInt("IDdireccion");
-                cliente = new Cliente(idCliente, usuario, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
+                cliente = new Cliente(idCliente, usuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
+            }
+            return cliente;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+            return null;
+        }
+    }
+    
+    @Override
+    public Cliente consultarExistencia(String usuario) {
+        String codigoSQL = "select IDcliente,usuario,contraseña,nombre,apellidopaterno,apellidomaterno,fechanacimiento,edad,IDdireccion "
+                + "from clientes "
+                + "where usuario = ?";
+        try (Connection conexion = generadorConexiones.crearConexion();
+                PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
+            comando.setString(1, usuario);
+            ResultSet resultado = comando.executeQuery();
+
+            Cliente cliente = null;
+            //Si se encontró el cliente...
+            if (resultado.next()) {
+                Integer idCliente = resultado.getInt("IDcliente");
+                String contraseña = resultado.getString("contraseña");
+                String nombre = resultado.getString("nombre");
+                String apellidoPaterno = resultado.getString("apellidoPaterno");
+                String apellidoMaterno = resultado.getString("apellidoMaterno");
+                Date fechaNacimiento = resultado.getDate("fechaNacimiento");
+                Integer edad = resultado.getInt("edad");
+                Integer idDireccion = resultado.getInt("IDdireccion");
+                cliente = new Cliente(idCliente, usuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad, idDireccion);
             }
             return cliente;
         } catch (SQLException e) {
@@ -61,18 +92,19 @@ public class ClientesDAO implements IClientesDAO{
     
     @Override
     public Cliente insertar(Cliente cliente) throws PersistenciaException {
-        String codigoSQL = "insert into clientes(usuario,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion) "
-                + "values(?,?,?,?,?,?,?)";
+        String codigoSQL = "insert into clientes(usuario,contraseña,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion) "
+                + "values(?,?,?,?,?,?,?,?)";
         try (Connection conexion = generadorConexiones.crearConexion();
                 PreparedStatement comando = conexion.prepareStatement(
                         codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, cliente.getUsuario());
-            comando.setString(2, cliente.getNombre());
-            comando.setString(3, cliente.getApellidoPaterno());
-            comando.setString(4, cliente.getApellidoMaterno());
-            comando.setDate(5, cliente.getFechaNacimiento());
-            comando.setInt(6, cliente.getEdad());
-            comando.setInt(7, cliente.getIdDireccion());
+            comando.setString(2, cliente.getContraseña());
+            comando.setString(3, cliente.getNombre());
+            comando.setString(4, cliente.getApellidoPaterno());
+            comando.setString(5, cliente.getApellidoMaterno());
+            comando.setDate(6, cliente.getFechaNacimiento());
+            comando.setInt(7, cliente.getEdad());
+            comando.setInt(8, cliente.getIdDireccion());
             comando.executeUpdate();
             ResultSet llavesGeneradas = comando.getGeneratedKeys();
             if (llavesGeneradas.next()) {
