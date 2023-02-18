@@ -6,7 +6,16 @@
 
 package interfazGrafica;
 
+import dominio.Cliente;
+import dominio.Cuenta;
+import interfaces.IClientesDAO;
+import interfaces.ICuentasDAO;
+import interfaces.IDireccionesClientesDAO;
+import interfaces.IRetirosDAO;
+import interfaces.ITransferenciasDAO;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,14 +23,33 @@ import javax.swing.ImageIcon;
  */
 public class FrmCuentas extends javax.swing.JFrame {
 
-    /** Creates new form FrmCuentas */
-    public FrmCuentas() {
+    private static final Logger LOG = Logger.getLogger(FrmCuentas.class.getName());
+    private final IClientesDAO clientesDAO;
+    private final IDireccionesClientesDAO direccionesClientesDAO;
+    private final ICuentasDAO cuentasDAO;
+    private final IRetirosDAO retirosDAO;
+    private final ITransferenciasDAO transferenciasDAO;
+    private final Cliente clienteSesion;
+    private Cuenta cuentaIniciada;
+
+    public FrmCuentas(Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("CUENTAS");
+        this.clientesDAO = clientesDAO;
+        this.direccionesClientesDAO = direccionesClientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.retirosDAO = retirosDAO;
+        this.transferenciasDAO = transferenciasDAO;
+        this.clienteSesion = clienteSesion;
         initComponents();
+        this.cuentasDAO.rellenarComboCuentas("numeroCuenta", cbxCuentas);
     }
-
+    
+    public void consultarCuenta(){
+        String numCuenta = (String) this.cbxCuentas.getSelectedItem();
+        this.cuentaIniciada = this.cuentasDAO.consultar(numCuenta);
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -34,7 +62,7 @@ public class FrmCuentas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxCuentas = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         btnContinuar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -56,9 +84,8 @@ public class FrmCuentas extends javax.swing.JFrame {
         jLabel2.setText("¡BIENVENIDO!");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 130, 30));
+        cbxCuentas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(cbxCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Seleccione cuenta");
@@ -116,18 +143,28 @@ public class FrmCuentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCuentaActionPerformed
-        // TODO add your handling code here:
-        FrmAgregarCuenta agregarCuenta = new FrmAgregarCuenta();
+        FrmAgregarCuenta agregarCuenta = new FrmAgregarCuenta(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
         agregarCuenta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAgregarCuentaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
+        this.consultarCuenta();
+        if (cuentaIniciada != null){
+            FrmBanco frmBanco = new FrmBanco(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            frmBanco.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(
+                        this,
+                        "No hay cuentas registradas.",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
 
@@ -136,7 +173,7 @@ public class FrmCuentas extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarCuenta;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxCuentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

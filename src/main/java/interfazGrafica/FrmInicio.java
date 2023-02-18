@@ -7,7 +7,10 @@ package interfazGrafica;
 
 import dominio.Cliente;
 import interfaces.IClientesDAO;
+import interfaces.ICuentasDAO;
 import interfaces.IDireccionesClientesDAO;
+import interfaces.IRetirosDAO;
+import interfaces.ITransferenciasDAO;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,18 +24,25 @@ public class FrmInicio extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(FrmInicio.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
+    private final ICuentasDAO cuentasDAO;
+    private final IRetirosDAO retirosDAO;
+    private final ITransferenciasDAO transferenciasDAO;
+    private Cliente clienteSesion;
     private String usuario;
     private String contraseña;
 
     /**
      * Creates new form frmPrincipal
      */
-    public FrmInicio(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO) {
+    public FrmInicio(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("INICIO");
         this.clientesDAO = clientesDAO;
         this.direccionesClientesDAO = direccionesClientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.retirosDAO = retirosDAO;
+        this.transferenciasDAO = transferenciasDAO;
         initComponents();
         this.lblOcultar.setVisible(false);
     }
@@ -46,6 +56,7 @@ public class FrmInicio extends javax.swing.JFrame {
         this.consultarFormulario();
         Cliente validacionExistencia = this.clientesDAO.consultarExistencia(usuario);
         if (validacionExistencia != null) {
+            clienteSesion = validacionExistencia;
             return true;
         } else {
             return false;
@@ -162,7 +173,7 @@ public class FrmInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        FrmRegistroCliente registro = new FrmRegistroCliente(clientesDAO, direccionesClientesDAO);
+        FrmRegistroCliente registro = new FrmRegistroCliente(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
         registro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
@@ -170,9 +181,9 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if (this.verificarExistencia()) {
             if (this.verificarContraseña()) {
-                FrmCuentas cuentas = new FrmCuentas();
+                FrmCuentas cuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
                 cuentas.setVisible(true);
-                this.setVisible(false);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(
                         this,

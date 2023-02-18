@@ -13,23 +13,23 @@ import java.util.Objects;
  * @author march
  */
 public class Retiro {
-    private Integer folio;
+    private String folio;
     private String contraseña;
     private Date fechaHoraRealizacion;
     private Integer idCuentaOrigen;
 
-    public Retiro(Integer folio, String contraseña, Date fechaHoraRealizacion, Integer idCuentaOrigen) {
+    public Retiro(String folio, String contraseña, Date fechaHoraRealizacion, Integer idCuentaOrigen) {
         this.folio = folio;
         this.contraseña = contraseña;
         this.fechaHoraRealizacion = fechaHoraRealizacion;
         this.idCuentaOrigen = idCuentaOrigen;
     }
 
-    public Integer getFolio() {
+    public String getFolio() {
         return folio;
     }
 
-    public void setFolio(Integer folio) {
+    public void setFolio(String folio) {
         this.folio = folio;
     }
 

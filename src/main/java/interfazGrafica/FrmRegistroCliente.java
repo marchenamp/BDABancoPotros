@@ -9,7 +9,10 @@ import dominio.Cliente;
 import dominio.DireccionesClientes;
 import excepciones.PersistenciaException;
 import interfaces.IClientesDAO;
+import interfaces.ICuentasDAO;
 import interfaces.IDireccionesClientesDAO;
+import interfaces.IRetirosDAO;
+import interfaces.ITransferenciasDAO;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
@@ -27,16 +30,22 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(FrmRegistroCliente.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
+    private final ICuentasDAO cuentasDAO;
+    private final IRetirosDAO retirosDAO;
+    private final ITransferenciasDAO transferenciasDAO;
 
     /**
      * Creates new form FrmRegistroCliente
      */
-    public FrmRegistroCliente(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO) {
+    public FrmRegistroCliente(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("REGISTRO");
         this.clientesDAO = clientesDAO;
         this.direccionesClientesDAO = direccionesClientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.retirosDAO = retirosDAO;
+        this.transferenciasDAO = transferenciasDAO;
         initComponents();
         this.lblOcultar.setVisible(false);
     }
@@ -80,8 +89,8 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         try {
             Cliente cliente = this.consultarFormularioCliente(idDireccion);
             if (cliente.getEdad() > 12) {
-                Cliente clienteGuardado = this.clientesDAO.insertar(cliente);
-                this.mostrarMensajeClienteGuardado(clienteGuardado);
+                this.clientesDAO.insertar(cliente);
+                this.mostrarMensajeClienteGuardado();
             } else {
                 JOptionPane.showMessageDialog(
                         this,
@@ -89,7 +98,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
                         "Información",
                         JOptionPane.INFORMATION_MESSAGE);
             }
-            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO);
+            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
             inicio.setVisible(true);
             this.dispose();
         } catch (PersistenciaException e) {
@@ -97,7 +106,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         }
     }
 
-    private void mostrarMensajeClienteGuardado(Cliente cliente) {
+    private void mostrarMensajeClienteGuardado() {
         JOptionPane.showMessageDialog(
                 this,
                 "Cliente agregado exitosamente",
@@ -337,7 +346,7 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea regresar a la pantalla de inicio?", "REGRESAR", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO);
+            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
             inicio.setVisible(true);
             this.dispose();
         }

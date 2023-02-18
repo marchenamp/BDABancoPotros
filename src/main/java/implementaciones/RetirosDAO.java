@@ -5,10 +5,22 @@
  */
 package implementaciones;
 
+import interfaces.IConexionBD;
+import interfaces.IRetirosDAO;
+import java.util.logging.Logger;
+
 /**
  *
  * @author march
  */
-public class RetirosDAO {
+public class RetirosDAO implements IRetirosDAO{
+
+    private static final Logger LOG = Logger.getLogger(RetirosDAO.class.getName());
+    private final IConexionBD generadorConexiones;
+
+    public RetirosDAO(IConexionBD generadorConexiones) {
+        this.generadorConexiones = generadorConexiones;
+    }
+    
     
 }

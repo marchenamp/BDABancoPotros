@@ -1,21 +1,118 @@
 package interfazGrafica;
 
+import dominio.Cliente;
+import dominio.Cuenta;
+import excepciones.PersistenciaException;
+import interfaces.IClientesDAO;
+import interfaces.ICuentasDAO;
+import interfaces.IDireccionesClientesDAO;
+import interfaces.IRetirosDAO;
+import interfaces.ITransferenciasDAO;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.logging.Logger;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author magda
  */
 public class FrmAgregarCuenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmAgregarCuenta
-     */
-    public FrmAgregarCuenta() {
+    private static final Logger LOG = Logger.getLogger(FrmAgregarCuenta.class.getName());
+    private final IClientesDAO clientesDAO;
+    private final IDireccionesClientesDAO direccionesClientesDAO;
+    private final ICuentasDAO cuentasDAO;
+    private final IRetirosDAO retirosDAO;
+    private final ITransferenciasDAO transferenciasDAO;
+    private Cliente clienteSesion;
+
+    public FrmAgregarCuenta(Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
+//        this.setIconImage(icon.getImage());
+        this.setTitle("CUENTAS");
+        this.clientesDAO = clientesDAO;
+        this.direccionesClientesDAO = direccionesClientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.retirosDAO = retirosDAO;
+        this.transferenciasDAO = transferenciasDAO;
+        this.clienteSesion = clienteSesion;
         initComponents();
+        this.imprimirDatos();
+    }
+
+    public void imprimirDatos() {
+        this.txtNumeroTarjeta.setText(cadenaAleatoria());
+        LocalDate fechaActual = LocalDate.now();
+        this.txtFechaApertura.setDate(Date.valueOf(fechaActual));
+        this.txtSaldo.setText("00.00");
+        this.txtNombre.setText(clienteSesion.getNombre());
+        this.txtApellidoPaterno.setText(clienteSesion.getApellidoPaterno());
+        this.txtApellidoMaterno.setText(clienteSesion.getApellidoMaterno());
+    }
+    
+    public Cuenta consultarFormulario(){
+        String numCuenta = this.txtNumeroTarjeta.getText();
+        String fecha = ((JTextField) this.txtFechaApertura.getDateEditor().getUiComponent()).getText();
+        Date fechaApertura = Date.valueOf(fecha);
+        float saldo = Float.parseFloat(this.txtSaldo.getText());
+        Integer idCliente = clienteSesion.getIdCliente();
+        
+        Cuenta cuenta = new Cuenta(numCuenta, fechaApertura, saldo, idCliente);
+        return cuenta;
+    }
+    
+    public void guardarCuenta() {
+        try {
+            Cuenta cuenta = this.consultarFormulario();
+            this.cuentasDAO.insertar(cuenta);
+            this.mostrarMensajeCuentaGuardada();
+            FrmCuentas frmCuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            frmCuentas.setVisible(true);
+            this.dispose();
+        } catch (PersistenciaException e) {
+            this.mostrarMensajeErrorAlGuardado();
+        }
+    }
+
+    public static String cadenaAleatoria() {
+        // El banco de caracteres
+        String banco = "1234567890";
+        // La cadena en donde iremos agregando un carácter aleatorio
+        String cadena = "";
+        for (int x = 0; x < 16; x++) {
+            int indiceAleatorio = numeroAleatorioEnRango(0, banco.length() - 1);
+            char caracterAleatorio = banco.charAt(indiceAleatorio);
+            cadena += caracterAleatorio;
+        }
+        return cadena;
+    }
+
+    public static int numeroAleatorioEnRango(int minimo, int maximo) {
+        // nextInt regresa en rango pero con límite superior exclusivo, por eso sumamos 1
+        return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
+    }
+
+    private void mostrarMensajeCuentaGuardada() {
+        JOptionPane.showMessageDialog(
+                this,
+                "Cuenta agregada exitosamente",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void mostrarMensajeErrorAlGuardado() {
+        JOptionPane.showMessageDialog(
+                this,
+                "No fue posible agregar la cuenta",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -28,29 +125,113 @@ public class FrmAgregarCuenta extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNumeroTarjeta = new javax.swing.JTextField();
+        txtSaldo = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtApellidoPaterno = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtApellidoMaterno = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
+        txtFechaApertura = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setText("Número de Tarjeta:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
+        jLabel2.setText("Fecha de Apertura:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+
+        jLabel3.setText("Saldo:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
+
+        jLabel4.setText("Nombre:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+
+        txtNumeroTarjeta.setEditable(false);
+        jPanel1.add(txtNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 200, -1));
+
+        txtSaldo.setEditable(false);
+        jPanel1.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 100, -1));
+
+        txtNombre.setEditable(false);
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 200, -1));
+
+        jLabel5.setText("Datos generados para tu cuenta");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 220, 20));
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 100, -1));
+
+        jLabel7.setText("Apellido Paterno:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 120, -1));
+
+        txtApellidoPaterno.setEditable(false);
+        jPanel1.add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 200, -1));
+
+        jLabel8.setText("Apellido Materno:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+
+        txtApellidoMaterno.setEditable(false);
+        jPanel1.add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 200, -1));
+
+        btnCancelar.setText("Cancelar");
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, -1));
+
+        txtFechaApertura.setDateFormatString("yyyy-MM-dd");
+        txtFechaApertura.setEnabled(false);
+        jPanel1.add(txtFechaApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 200, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        this.guardarCuenta();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtApellidoMaterno;
+    private javax.swing.JTextField txtApellidoPaterno;
+    private com.toedter.calendar.JDateChooser txtFechaApertura;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNumeroTarjeta;
+    private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 }

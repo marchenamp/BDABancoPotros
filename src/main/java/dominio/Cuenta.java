@@ -13,23 +13,23 @@ import java.util.Objects;
  * @author march
  */
 public class Cuenta {
-    private Integer numeroCuenta;
+    private String numeroCuenta;
     private Date fechaApertura;
     private float saldo;
     private Integer idCliente;
 
-    public Cuenta(Integer numeroCuenta, Date fechaApertura, float saldo, Integer idCliente) {
+    public Cuenta(String numeroCuenta, Date fechaApertura, float saldo, Integer idCliente) {
         this.numeroCuenta = numeroCuenta;
         this.fechaApertura = fechaApertura;
         this.saldo = saldo;
         this.idCliente = idCliente;
     }
 
-    public Integer getNumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(Integer numeroCuenta) {
+    public void setNumeroCuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
 
