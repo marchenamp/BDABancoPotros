@@ -13,6 +13,7 @@ import interfaces.ICuentasDAO;
 import interfaces.IDireccionesClientesDAO;
 import interfaces.IRetirosDAO;
 import interfaces.ITransferenciasDAO;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
@@ -201,12 +202,27 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 210, -1));
 
         txtApellidoPaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtApellidoPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoPaternoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 210, -1));
 
         txtApellidoMaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtApellidoMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoMaternoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 210, -1));
 
         btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -232,6 +248,11 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 210, -1));
 
         lblDatosPersonales.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -252,12 +273,27 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jPanel1.add(lblNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
 
         txtColonia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtColonia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColoniaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 210, -1));
 
         txtNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 210, -1));
 
         txtCalle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCalle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCalleKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 210, -1));
 
         btnVaciar.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
@@ -272,11 +308,22 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
         jPanel1.add(btnVaciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, -1, -1));
 
         txtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
+        txtFechaNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFechaNacimientoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 120, -1));
 
         lblContraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblContraseña.setText("Contraseña:");
         jPanel1.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
+
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 210, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
@@ -351,6 +398,71 @@ public class FrmRegistroCliente extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtNombre.transferFocus();
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoPaternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPaternoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtApellidoPaterno.transferFocus();
+        }
+    }//GEN-LAST:event_txtApellidoPaternoKeyPressed
+
+    private void txtApellidoMaternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMaternoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtApellidoMaterno.transferFocus();
+        }
+    }//GEN-LAST:event_txtApellidoMaternoKeyPressed
+
+    private void txtFechaNacimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaNacimientoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtFechaNacimiento.transferFocus();
+        }
+    }//GEN-LAST:event_txtFechaNacimientoKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtUsuario.transferFocus();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtContraseña.transferFocus();
+        }
+    }//GEN-LAST:event_txtContraseñaKeyPressed
+
+    private void txtCalleKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCalleKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtCalle.transferFocus();
+        }
+    }//GEN-LAST:event_txtCalleKeyPressed
+
+    private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtNumero.transferFocus();
+        }
+    }//GEN-LAST:event_txtNumeroKeyPressed
+
+    private void txtColoniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColoniaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            guardarCliente(guardarDireccion());
+            vaciarTextFields();
+            txtNombre.requestFocus();
+        }
+    }//GEN-LAST:event_txtColoniaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

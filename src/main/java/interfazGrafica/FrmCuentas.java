@@ -44,6 +44,7 @@ public class FrmCuentas extends javax.swing.JFrame {
         this.clienteSesion = clienteSesion;
         initComponents();
         this.cuentasDAO.rellenarComboCuentas("numeroCuenta", cbxCuentas);
+        this.lblNombreCliente.setText("\n¡Bienvenido(a) " + clienteSesion.getNombre() + "!");
     }
     
     public void consultarCuenta(){
@@ -60,8 +61,7 @@ public class FrmCuentas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNombreCliente = new javax.swing.JLabel();
         cbxCuentas = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         btnContinuar = new javax.swing.JButton();
@@ -75,21 +75,17 @@ public class FrmCuentas extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel3.setText("Nombre del Cliente");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel2.setText("¡BIENVENIDO!");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
+        lblNombreCliente.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        lblNombreCliente.setForeground(new java.awt.Color(0, 153, 255));
+        lblNombreCliente.setText("Nombre Cliente");
+        jPanel1.add(lblNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         cbxCuentas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(cbxCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 130, 30));
+        jPanel1.add(cbxCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Seleccione cuenta");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
 
         btnContinuar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnContinuar.setText("Continuar");
@@ -98,7 +94,7 @@ public class FrmCuentas extends javax.swing.JFrame {
                 btnContinuarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, -1));
+        jPanel1.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRegresar.setText("Regresar");
@@ -107,13 +103,13 @@ public class FrmCuentas extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tarjeta.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
         btnAgregarCuenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAgregarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
@@ -123,7 +119,7 @@ public class FrmCuentas extends javax.swing.JFrame {
                 btnAgregarCuentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 170, -1));
+        jPanel1.add(btnAgregarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,7 +131,9 @@ public class FrmCuentas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,7 +147,12 @@ public class FrmCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarCuentaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+ int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea regresar a la pantalla de inicio?", "REGRESAR", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            inicio.setVisible(true);
+            this.dispose();
+        }        
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
@@ -175,11 +178,10 @@ public class FrmCuentas extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxCuentas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblNombreCliente;
     // End of variables declaration//GEN-END:variables
 
 }

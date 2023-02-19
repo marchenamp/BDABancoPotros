@@ -60,8 +60,16 @@ public class CuentasDAO implements ICuentasDAO {
 
     @Override
     public Cuenta insertar(Cuenta cuenta) throws PersistenciaException {
-        String codigoSQL = "insert into cuentas(numeroCuenta,fechaApertura,saldo,IDcliente) "
-                + "values(?,?,?,?)";
+        String codigoSQL = "INSERT INTO cuentas("
+                + "numeroCuenta, "
+                + "fechaApertura, "
+                + "saldo, "
+                + "IDcliente"
+                + ") VALUES ( "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?)";
         try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(
                 codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, cuenta.getNumeroCuenta());

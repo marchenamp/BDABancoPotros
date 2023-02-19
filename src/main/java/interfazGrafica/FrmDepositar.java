@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
  *
  * @author march
  */
-public class FrmAgregarDinero extends javax.swing.JFrame {
+public class FrmDepositar extends javax.swing.JFrame {
 
-    private static final Logger LOG = Logger.getLogger(FrmAgregarDinero.class.getName());
+    private static final Logger LOG = Logger.getLogger(FrmDepositar.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
     private final ICuentasDAO cuentasDAO;
@@ -32,7 +32,7 @@ public class FrmAgregarDinero extends javax.swing.JFrame {
     private float cantidadAgregada;
     private boolean operacion;
 
-    public FrmAgregarDinero(Cuenta cuentaIniciada, Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
+    public FrmDepositar(Cuenta cuentaIniciada, Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("BANCO POTROS");
@@ -97,105 +97,140 @@ public class FrmAgregarDinero extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnSumar = new javax.swing.JButton();
         btnRestar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnOtraCantidad = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn50.setText("50");
+        btn50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn50.setForeground(new java.awt.Color(0, 153, 255));
+        btn50.setText("$ 50");
         btn50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn50ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn50, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        jPanel1.add(btn50, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, 40));
 
-        btn100.setText("100");
+        btn100.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn100.setForeground(new java.awt.Color(0, 153, 255));
+        btn100.setText("$ 100");
         btn100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn100ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn100, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        jPanel1.add(btn100, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 80, 40));
 
-        btn200.setText("200");
+        btn200.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn200.setForeground(new java.awt.Color(0, 153, 255));
+        btn200.setText("$ 200");
         btn200.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn200ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn200, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        jPanel1.add(btn200, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 80, 40));
 
-        btn500.setText("500");
+        btn500.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn500.setForeground(new java.awt.Color(0, 153, 255));
+        btn500.setText("$ 500");
         btn500.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn500ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
+        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 80, 40));
 
-        btn1000.setText("1000");
+        btn1000.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn1000.setForeground(new java.awt.Color(0, 153, 255));
+        btn1000.setText("$ 1000");
         btn1000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn1000ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+        jPanel1.add(btn1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, 40));
 
-        btn2000.setText("2000");
+        btn2000.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn2000.setForeground(new java.awt.Color(0, 153, 255));
+        btn2000.setText("$ 2000");
         btn2000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn2000ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn2000, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
-        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 100, -1));
+        jPanel1.add(btn2000, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, 40));
 
-        jLabel1.setText("Total:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 100, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Saldo a depositar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, -1, -1));
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
+        btnSumar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSumar.setText("Sumar");
         btnSumar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSumarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 80, 50));
+        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 80, 30));
 
+        btnRestar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRestar.setText("Restar");
         btnRestar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 80, 50));
+        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 80, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        btnOtraCantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnOtraCantidad.setText("Otra cantidad");
+        jPanel1.add(btnOtraCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, 30));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Seleccione la cantidad");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -325,9 +360,12 @@ public class FrmAgregarDinero extends javax.swing.JFrame {
     private javax.swing.JButton btn500;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnOtraCantidad;
     private javax.swing.JButton btnRestar;
     private javax.swing.JButton btnSumar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables

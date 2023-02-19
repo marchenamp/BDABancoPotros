@@ -11,6 +11,7 @@ import interfaces.ICuentasDAO;
 import interfaces.IDireccionesClientesDAO;
 import interfaces.IRetirosDAO;
 import interfaces.ITransferenciasDAO;
+import java.awt.event.KeyEvent;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -72,6 +73,11 @@ public class FrmInicio extends javax.swing.JFrame {
         }
     }
 
+    private void vaciarTextFields() {
+        txtUsuario.setText(null);
+        txtContraseña.setText(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,7 +115,19 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 130, -1));
+
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 130, -1));
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -190,6 +208,7 @@ public class FrmInicio extends javax.swing.JFrame {
                         "La contraseña está incorrecta.",
                         "Información",
                         JOptionPane.INFORMATION_MESSAGE);
+                vaciarTextFields();
             }
         } else {
             JOptionPane.showMessageDialog(
@@ -197,6 +216,7 @@ public class FrmInicio extends javax.swing.JFrame {
                     "El cliente ingresado no existe.",
                     "Información",
                     JOptionPane.INFORMATION_MESSAGE);
+            vaciarTextFields();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -213,6 +233,41 @@ public class FrmInicio extends javax.swing.JFrame {
         lblOcultar.setVisible(true);
         txtContraseña.setEchoChar((char) 0);
     }//GEN-LAST:event_lblVerMouseClicked
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (this.verificarExistencia()) {
+                if (this.verificarContraseña()) {
+                    FrmCuentas cuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+                    cuentas.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "La contraseña está incorrecta.",
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    vaciarTextFields();
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El cliente ingresado no existe.",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
+                vaciarTextFields();
+            }
+            txtUsuario.requestFocus();
+        }
+    }//GEN-LAST:event_txtContraseñaKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            txtUsuario.transferFocus();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
