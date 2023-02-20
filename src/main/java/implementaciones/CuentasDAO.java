@@ -23,22 +23,35 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author march
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
 public class CuentasDAO implements ICuentasDAO {
 
     private static final Logger LOG = Logger.getLogger(CuentasDAO.class.getName());
     private final IConexionBD generadorConexiones;
 
+    /**
+     * Método constructor que crea la conexión con la base de datos.
+     *
+     * @param generadorConexiones Parámetro que genera la base de datos.
+     */
     public CuentasDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
 
+    /**
+     * Método que consulta en la base de datos un número de cuenta.
+     *
+     * @param numCuenta Cadena de texto con el número de cuenta.
+     * @return Cuenta consultada, null si ocurre un error.
+     */
     @Override
     public Cuenta consultar(String numCuenta) {
-        String codigoSQL = "select fechaapertura,saldo,idcliente "
-                + "from cuentas "
-                + "where numerocuenta = ?";
+        String codigoSQL = "SELECT "
+                + "fechaapertura, "
+                + "saldo, "
+                + "idcliente "
+                + "FROM cuentas WHERE numerocuenta = ?";
         try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
             comando.setString(1, numCuenta);
             ResultSet resultado = comando.executeQuery();
@@ -58,6 +71,15 @@ public class CuentasDAO implements ICuentasDAO {
         }
     }
 
+    /**
+     * Método que inserta una cuenta a la base de datos.
+     *
+     * @param cuenta Objeto de la clase Cuenta con numeroCuenta, fechaApertura,
+     * saldo y idCliente.
+     * @return Cuenta insertada, null si ocurre un error.
+     * @throws PersistenciaException Lanza una excepción si hay un error en la
+     * ejecución del método.
+     */
     @Override
     public Cuenta insertar(Cuenta cuenta) throws PersistenciaException {
         String codigoSQL = "INSERT INTO cuentas("
@@ -88,9 +110,16 @@ public class CuentasDAO implements ICuentasDAO {
         }
     }
 
+    /**
+     * Método que consulta un número de cuenta en la base de datos para
+     * posteriormente insertarlo en el JComboBox de FrmCuentas.
+     *
+     * @param columna Cadena de texto con la columna a insertar.
+     * @param combo JComboBox de FrmCuentas.
+     */
     @Override
     public void rellenarComboCuentas(String columna, JComboBox combo) {
-        String codigoSQL = "select * from cuentas";
+        String codigoSQL = "SELECT * FROM cuentas";
         try {
             Statement statement;
             Connection conexion = generadorConexiones.crearConexion();
@@ -106,11 +135,19 @@ public class CuentasDAO implements ICuentasDAO {
         }
     }
 
+    /**
+     * Método que suma el saldo del número de cuenta en la base de datos.
+     *
+     * @param numCuenta Cadena de texto con el número de cuenta.
+     * @param cantidad Número decimal de la cantidad en la cuenta.
+     * @throws PersistenciaException Lanza una excepción si hay un error en la
+     * ejecución del método.
+     */
     @Override
     public void sumarSaldo(String numCuenta, float cantidad) throws PersistenciaException {
-        String codigoSQL = "update cuentas "
-                + "set saldo = saldo + ? "
-                + "where numeroCuenta = ?";
+        String codigoSQL = "UPDATE cuentas "
+                + "SET saldo = saldo + ? "
+                + "WHERE numeroCuenta = ?";
         try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(
                 codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setFloat(1, cantidad);

@@ -20,23 +20,41 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author march
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
-public class ClientesDAO implements IClientesDAO{
+public class ClientesDAO implements IClientesDAO {
+
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD generadorConexiones;
-    
+
+    /**
+     * Método constructor que crea la conexión con la base de datos.
+     *
+     * @param generadorConexiones Parámetro que genera la base de datos.
+     */
     public ClientesDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
-    
+
+    /**
+     * Método que consulta un cliente en la base de datos.
+     *
+     * @param idCliente Número entero con el ID del cliente.
+     * @return Cliente consultado, null si ocurre un error.
+     */
     @Override
     public Cliente consultar(Integer idCliente) {
-        String codigoSQL = "select usuario,contraseña,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion "
-                + "from clientes "
-                + "where IDcliente = ?";
-        try (Connection conexion = generadorConexiones.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
+        String codigoSQL = "SELECT "
+                + "usuario, "
+                + "contraseña, "
+                + "nombre, "
+                + "apellidoPaterno, "
+                + "apellidoMaterno, "
+                + "fechaNacimiento, "
+                + "edad, "
+                + "IDdireccion "
+                + "FROM clientes WHERE IDcliente = ?";
+        try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
             comando.setInt(1, idCliente);
             ResultSet resultado = comando.executeQuery();
 
@@ -59,14 +77,27 @@ public class ClientesDAO implements IClientesDAO{
             return null;
         }
     }
-    
+
+    /**
+     * Método que consulta la existencia de un usuario en la base de datos.
+     *
+     * @param usuario Cadena de texto con el usuario del cliente.
+     * @return Cliente cuya existencia fue consultada, null si ocurre un error.
+     */
     @Override
     public Cliente consultarExistencia(String usuario) {
-        String codigoSQL = "select IDcliente,usuario,contraseña,nombre,apellidopaterno,apellidomaterno,fechanacimiento,edad,IDdireccion "
-                + "from clientes "
-                + "where usuario = ?";
-        try (Connection conexion = generadorConexiones.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
+        String codigoSQL = "SELECT "
+                + "IDcliente, "
+                + "usuario, "
+                + "contraseña, "
+                + "nombre, "
+                + "apellidopaterno, "
+                + "apellidomaterno, "
+                + "fechanacimiento, "
+                + "edad, "
+                + "IDdireccion "
+                + "FROM clientes WHERE usuario = ?";
+        try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
             comando.setString(1, usuario);
             ResultSet resultado = comando.executeQuery();
 
@@ -89,14 +120,39 @@ public class ClientesDAO implements IClientesDAO{
             return null;
         }
     }
-    
+
+    /**
+     * Método que inserta un cliente a la base de datos.
+     *
+     * @param cliente Objeto de la clase Cliente, con usuario, contraseña,
+     * nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, edad,
+     * IDdireccion.
+     * @return cliente insertado, null si ocurre un error.
+     * @throws PersistenciaException Lanza una excepción si hay un error en la
+     * ejecución del método.
+     */
     @Override
     public Cliente insertar(Cliente cliente) throws PersistenciaException {
-        String codigoSQL = "insert into clientes(usuario,contraseña,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,edad,IDdireccion) "
-                + "values(?,?,?,?,?,?,?,?)";
-        try (Connection conexion = generadorConexiones.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(
-                        codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
+        String codigoSQL = "INSERT INTO clientes( "
+                + "usuario, "
+                + "contraseña, "
+                + "nombre, "
+                + "apellidoPaterno, "
+                + "apellidoMaterno, "
+                + "fechaNacimiento, "
+                + "edad, "
+                + "IDdireccion "
+                + ") VALUES ("
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?)";
+        try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(
+                codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, cliente.getUsuario());
             comando.setString(2, cliente.getContraseña());
             comando.setString(3, cliente.getNombre());
@@ -120,12 +176,17 @@ public class ClientesDAO implements IClientesDAO{
         }
     }
 
+    /**
+     * Método que elimina un cliente de la base de datos.
+     *
+     * @param idCliente Número entero con el ID del cliente.
+     * @return Cliente eliminado si la cantidad de clientes es mayor a 0, null
+     * en caso contrario o si ocurre un error.
+     */
     @Override
     public Cliente eliminar(Integer idCliente) {
-        String codigoSQL = "delete from clientes "
-                + "where IDcliente = ?";
-        try (Connection conexion = generadorConexiones.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
+        String codigoSQL = "DELETE FROM clientes WHERE IDcliente = ?";
+        try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
             comando.setInt(1, idCliente);
             Cliente cliente = consultar(idCliente);
             int numClientesEliminados = comando.executeUpdate();

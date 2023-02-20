@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmRealizarRetiro extends javax.swing.JFrame {
 
-    private static final Logger LOG = Logger.getLogger(FrmRetiro.class.getName());
+    private static final Logger LOG = Logger.getLogger(FrmRetiros.class.getName());
     private final IClientesDAO clientesDAO;
     private final IDireccionesClientesDAO direccionesClientesDAO;
     private final ICuentasDAO cuentasDAO;

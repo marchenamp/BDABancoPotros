@@ -188,7 +188,7 @@ public class FrmBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        FrmRetiro retiro = new FrmRetiro(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        FrmRetiros retiro = new FrmRetiros(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
         retiro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRetirarActionPerformed

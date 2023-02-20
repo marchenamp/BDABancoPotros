@@ -21,23 +21,36 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author march
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
 public class RetirosDAO implements IRetirosDAO {
 
     private static final Logger LOG = Logger.getLogger(RetirosDAO.class.getName());
     private final IConexionBD generadorConexiones;
 
+    /**
+     * Método constructor que crea la conexión con la base de datos.
+     *
+     * @param generadorConexiones Parámetro que genera la base de datos.
+     */
     public RetirosDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
 
+    /**
+     * Método que consulta un retiro en la base de datos.
+     *
+     * @param folio Cadena de texto con el folio del retiro.
+     * @param contraseña Cadena de texto con la contraseña del retiro.
+     * @return retiro consultado, null si ocurre un error.
+     */
     @Override
     public Retiro consultar(String folio, String contraseña) {
-        String codigoSQL = "select cantidad,fechaHoraRealizacion,numCuentaOrigen "
-                + "from retiros "
-                + "where folio = ? "
-                + "and contraseña = ?";
+        String codigoSQL = "SELECT "
+                + "cantidad, "
+                + "fechaHoraRealizacion, "
+                + "numCuentaOrigen "
+                + "FROM retiros WHERE folio = ? AND contraseña = ?";
         try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(codigoSQL);) {
             comando.setString(1, folio);
             comando.setString(2, contraseña);
@@ -58,6 +71,16 @@ public class RetirosDAO implements IRetirosDAO {
         }
     }
 
+    /**
+     * Método que inserta un retiro a la base de datos.
+     *
+     * @param retiro Objeto de la clase Retiro que cuenta con folio, contraseña,
+     * cantidad y numCuentaOrigen.
+     * @return retiro insertado si la cantidad de filasAgregadas es mayor a 0,
+     * null en caso contrario o si ocurre un error.
+     * @throws PersistenciaException Lanza una excepción si hay un error en la
+     * ejecución del método.
+     */
     @Override
     public Retiro insertar(Retiro retiro) throws PersistenciaException {
         String codigoSQL = "INSERT INTO retiros("
@@ -88,6 +111,14 @@ public class RetirosDAO implements IRetirosDAO {
         }
     }
 
+    /**
+     * Método que resta dinero de un numero de cuenta de la base de datos.
+     *
+     * @param cantidad Número decimal con la cantidad a retirar.
+     * @param numCuenta Cadena de texto con el número de cuenta.
+     * @throws PersistenciaException Lanza una excepción si hay un error en la
+     * ejecución del método.
+     */
     @Override
     public void retirarDinero(float cantidad, String numCuenta) throws PersistenciaException {
         String codigoSQL = "update cuentas "

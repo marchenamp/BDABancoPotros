@@ -10,68 +10,152 @@ import java.util.Objects;
 
 /**
  *
- * @author march
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
 public class Transferencia {
+
     private Integer idTransferencia;
     private float cantidad;
     private Date fechaHoraRealizacion;
-    private Integer idCuentaOrigen;
-    private Integer idCuentaDestino;
+    private String numCuentaOrigen;
+    private String numCuentaDestino;
 
-    public Transferencia(float cantidad, Date fechaHoraRealizacion, Integer idCuentaOrigen, Integer idCuentaDestino) {
+    /**
+     * Método que establece los parámetros de la clase Transferencia a excepción
+     * de idTransferencia.
+     *
+     * @param cantidad Número decimal con la cantidad a transferir.
+     * @param fechaHoraRealizacion Fecha y hora de la realización de la
+     * transferencia con los formatos yyyy-MM-dd hh:mm.
+     * @param numCuentaOrigen Cadena de texto con el ID de la cuenta origen de la
+     * transferencia.
+     * @param numCuentaDestino Cadena de texto con el ID de la cuenta destino de la
+     * transferencia.
+     */
+    public Transferencia(float cantidad, Date fechaHoraRealizacion, String numCuentaOrigen, String numCuentaDestino) {
         this.cantidad = cantidad;
         this.fechaHoraRealizacion = fechaHoraRealizacion;
-        this.idCuentaOrigen = idCuentaOrigen;
-        this.idCuentaDestino = idCuentaDestino;
-    }
-    
-    public Transferencia(float cantidad, Integer idCuentaOrigen, Integer idCuentaDestino) {
-        this.cantidad = cantidad;
-        this.idCuentaOrigen = idCuentaOrigen;
-        this.idCuentaDestino = idCuentaDestino;
+        this.numCuentaOrigen = numCuentaOrigen;
+        this.numCuentaDestino = numCuentaDestino;
     }
 
+    /**
+     * Método que establece los parámetros de la clase Transferencia a excepción
+     * de idTransferencia y fechaHoraRealizacion.
+     *
+     * @param cantidad Número decimal con la cantidad a transferir.
+     * @param numCuentaOrigen Cadena de texto con el ID de la cuenta origen de la
+     * transferencia.
+     * @param numCuentaDestino Cadena de texto con el ID de la cuenta destino de la
+     * transferencia.
+     */
+    public Transferencia(float cantidad, String numCuentaOrigen, String numCuentaDestino) {
+        this.cantidad = cantidad;
+        this.numCuentaOrigen = numCuentaOrigen;
+        this.numCuentaDestino = numCuentaDestino;
+    }
+
+    /**
+     * Método que obtiene idTransferencia.
+     *
+     * @return idTransferencia Número entero con el ID de la transferencia.
+     */
     public Integer getIdTransferencia() {
         return idTransferencia;
     }
 
+    /**
+     * Método que establece idTransferencia.
+     *
+     * @param idTransferencia Número entero con el ID de la transferencia.
+     */
     public void setIdTransferencia(Integer idTransferencia) {
         this.idTransferencia = idTransferencia;
     }
 
+    /**
+     * Método que obtiene cantidad.
+     *
+     * @return cantidad Número decimal con la cantidad a transferir.
+     */
     public float getCantidad() {
         return cantidad;
     }
 
+    /**
+     * Método que establece cantidad.
+     *
+     * @param cantidad Número decimal con la cantidad a transferir.
+     */
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * Método que obtiene fechaHoraRealizacion.
+     *
+     * @return fechaHoraRealizacion Fecha y hora de la realización de la
+     * transferencia con los formatos yyyy-MM-dd hh:mm.
+     */
     public Date getFechaHoraRealizacion() {
         return fechaHoraRealizacion;
     }
 
+    /**
+     * Método que establece fechaHoraRealizacion.
+     *
+     * @param fechaHoraRealizacion Fecha y hora de la realización de la
+     * transferencia con los formatos yyyy-MM-dd hh:mm.
+     */
     public void setFechaHoraRealizacion(Date fechaHoraRealizacion) {
         this.fechaHoraRealizacion = fechaHoraRealizacion;
     }
 
-    public Integer getIdCuentaOrigen() {
-        return idCuentaOrigen;
+    /**
+     * Método que obtiene numCuentaOrigen.
+     *
+     * @return numCuentaOrigen Cadena de texto con el ID de la cuenta origen de la
+     * transferencia.
+     */
+    public String getNumCuentaOrigen() {
+        return numCuentaOrigen;
     }
 
-    public void setIdCuentaOrigen(Integer idCuentaOrigen) {
-        this.idCuentaOrigen = idCuentaOrigen;
+    /**
+     * Método que establece numCuentaOrigen.
+     *
+     * @param numCuentaOrigen Cadena de texto con el ID de la cuenta origen de la
+     * transferencia.
+     */
+    public void setNumCuentaOrigen(String numCuentaOrigen) {
+        this.numCuentaOrigen = numCuentaOrigen;
     }
 
-    public Integer getIdCuentaDestino() {
-        return idCuentaDestino;
+    /**
+     * Método que obtiene numCuentaDestino.
+     *
+     * @return numCuentaDestino Cadena de texto con el ID de la cuenta destino de
+     * la transferencia.
+     */
+    public String getnumCuentaDestino() {
+        return numCuentaDestino;
     }
 
-    public void setIdCuentaDestino(Integer idCuentaDestino) {
-        this.idCuentaDestino = idCuentaDestino;
+    /**
+     * Método que establece numCuentaDestino.
+     *
+     * @param numCuentaDestino Cadena de texto con el ID de la cuenta destino de la
+     * transferencia.
+     */
+    public void setNumCuentaDestino(String numCuentaDestino) {
+        this.numCuentaDestino = numCuentaDestino;
     }
 
+    /**
+     * Método que regresa el código Hash de idTransferencia.
+     *
+     * @return código Hash de idTransferencia.
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -79,6 +163,13 @@ public class Transferencia {
         return hash;
     }
 
+    /**
+     * Compara transferencia con el objeto del parámetro.
+     *
+     * @param obj Objeto a comparar.
+     * @return Verdadero si el objeto del parámetro es de la clase Transferencia
+     * y ambos tienen el mismo idTransferencia, Falso en caso contrario.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -96,6 +187,5 @@ public class Transferencia {
         }
         return true;
     }
-    
-    
+
 }

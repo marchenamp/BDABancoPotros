@@ -9,6 +9,7 @@ C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfaces\I
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\dominio\Transferencia.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGrafica\FrmBanco.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfaces\IClientesDAO.java
+C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGrafica\FrmRetiros.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfaces\IDireccionesClientesDAO.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\implementaciones\Principal.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfaces\IConexionBD.java
@@ -23,5 +24,5 @@ C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGraf
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\implementaciones\RetirosDAO.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGrafica\FrmInicio.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\implementaciones\TransferenciasDAO.java
-C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGrafica\FrmRetiro.java
 C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\implementaciones\DireccionesClientesDAO.java
+C:\Users\magda\OneDrive\Documentos\GitHub\BancoPotros\src\main\java\interfazGrafica\FrmTransferencias.java

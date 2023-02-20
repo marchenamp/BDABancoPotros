@@ -4,24 +4,18 @@
  */
 package interfazGrafica;
 
-import dominio.Cliente;
-import dominio.Cuenta;
-import dominio.Retiro;
+import dominio.*;
 import excepciones.PersistenciaException;
-import interfaces.IClientesDAO;
-import interfaces.ICuentasDAO;
-import interfaces.IDireccionesClientesDAO;
-import interfaces.IRetirosDAO;
-import interfaces.ITransferenciasDAO;
+import interfaces.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author march
+ * @author magda
  */
-public class FrmRetiros extends javax.swing.JFrame {
+public class FrmTransferencias extends javax.swing.JFrame {
 
     private static final Logger LOG = Logger.getLogger(FrmRetiros.class.getName());
     private final IClientesDAO clientesDAO;
@@ -34,17 +28,13 @@ public class FrmRetiros extends javax.swing.JFrame {
     private boolean operacion;
     private float cantidadAgregada;
 
-    public FrmRetiros(Cuenta cuentaIniciada, Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
+    /**
+     * Creates new form NewJFrame
+     */
+    public FrmTransferencias() {
+        //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("BANCO POTROS");
-        this.clientesDAO = clientesDAO;
-        this.direccionesClientesDAO = direccionesClientesDAO;
-        this.cuentasDAO = cuentasDAO;
-        this.retirosDAO = retirosDAO;
-        this.transferenciasDAO = transferenciasDAO;
-        this.clienteSesion = clienteSesion;
-        this.cuentaIniciada = cuentaIniciada;
         this.operacion = true;
         this.cantidadAgregada = 0f;
         initComponents();
@@ -53,57 +43,28 @@ public class FrmRetiros extends javax.swing.JFrame {
     }
 
     public void imprimirDatos() {
-        this.txtFolio.setText(numFolioAleatorio());
-        this.txtContraseña.setText(contraseñaAleatoria());
-        this.txtNumTarjeta.setText(this.cuentaIniciada.getNumeroCuenta());
+        txtTarjetaOrigen.setText(cuentaIniciada.getNumeroCuenta());
     }
 
-    public Retiro consultarFormulario() {
-        String folio = this.txtFolio.getText();
-        String contraseña = this.txtContraseña.getText();
+    public Transferencia consultarFormulario() {
         float cantidad = Float.parseFloat(this.txtCantidad.getText());
-        String numCuentaOrigen = this.txtNumTarjeta.getText();
-        Retiro retiro = new Retiro(folio, contraseña, cantidad, numCuentaOrigen);
-        return retiro;
+        String numCuentaOrigen = txtTarjetaOrigen.getText();
+        String numCuentaDestino = txtTarjetaDestino.getText();
+        Transferencia transferencia = new Transferencia(cantidad, numCuentaOrigen, numCuentaDestino);
+        return transferencia;
     }
 
-    public void registrarRetiro() {
+    public void registrarTransferencia() {
         try {
-            Retiro retiro = this.consultarFormulario();
-            this.retirosDAO.insertar(retiro);
-            mostrarMensajeRetiroRealizado();
+            Transferencia transferencia = consultarFormulario();
+            this.transferenciasDAO.insertar(transferencia);
+            mostrarMensajeTransferenciaRealizada();
             FrmBanco frmBanco = new FrmBanco(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
             frmBanco.setVisible(true);
             this.dispose();
         } catch (PersistenciaException e) {
-            mostrarMensajeErrorAlRetirar();
+            mostrarMensajeErrorAlTransferir();
         }
-    }
-
-    public static String numFolioAleatorio() {
-        // El banco de caracteres
-        String banco = "1234567890";
-        // La cadena en donde iremos agregando un carácter aleatorio
-        String cadena = "";
-        for (int x = 0; x < 12; x++) {
-            int indiceAleatorio = numeroAleatorioEnRango(0, banco.length() - 1);
-            char caracterAleatorio = banco.charAt(indiceAleatorio);
-            cadena += caracterAleatorio;
-        }
-        return cadena;
-    }
-
-    public static String contraseñaAleatoria() {
-        // El banco de caracteres
-        String banco = "1234567890";
-        // La cadena en donde iremos agregando un carácter aleatorio
-        String cadena = "";
-        for (int x = 0; x < 8; x++) {
-            int indiceAleatorio = numeroAleatorioEnRango(0, banco.length() - 1);
-            char caracterAleatorio = banco.charAt(indiceAleatorio);
-            cadena += caracterAleatorio;
-        }
-        return cadena;
     }
 
     public static int numeroAleatorioEnRango(int minimo, int maximo) {
@@ -111,18 +72,18 @@ public class FrmRetiros extends javax.swing.JFrame {
         return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
     }
 
-    private void mostrarMensajeRetiroRealizado() {
+    private void mostrarMensajeTransferenciaRealizada() {
         JOptionPane.showMessageDialog(
                 this,
-                "Retiro realizado de manera exitosa",
+                "Transferencia realizada de manera exitosa",
                 "INFORMACIÓN",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void mostrarMensajeErrorAlRetirar() {
+    private void mostrarMensajeErrorAlTransferir() {
         JOptionPane.showMessageDialog(
                 this,
-                "No fue posible realizar el retiro",
+                "No fue posible realizar la transferencia",
                 "ERROR",
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -138,13 +99,11 @@ public class FrmRetiros extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtFolio = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
+        txtTarjetaDestino = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        txtNumTarjeta = new javax.swing.JTextField();
+        txtTarjetaOrigen = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btn500 = new javax.swing.JButton();
         btn1000 = new javax.swing.JButton();
@@ -164,12 +123,8 @@ public class FrmRetiros extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Folio:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Contraseña:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        jLabel1.setText("Tarjeta de Destino:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Cantidad:");
@@ -177,15 +132,10 @@ public class FrmRetiros extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Tarjeta de Origen:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        txtFolio.setEditable(false);
-        txtFolio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 140, -1));
-
-        txtContraseña.setEditable(false);
-        txtContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 140, -1));
+        txtTarjetaDestino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtTarjetaDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 140, -1));
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
@@ -195,13 +145,13 @@ public class FrmRetiros extends javax.swing.JFrame {
         });
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 100, -1));
 
-        txtNumTarjeta.setEditable(false);
-        txtNumTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 140, -1));
+        txtTarjetaOrigen.setEditable(false);
+        txtTarjetaOrigen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtTarjetaOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel5.setText("Retirar Saldo");
+        jLabel5.setText("Realizar Transferencia");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, 30));
 
         btn500.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -311,12 +261,15 @@ public class FrmRetiros extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btn500ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn500ActionPerformed
         if (operacion) {
@@ -419,7 +372,7 @@ public class FrmRetiros extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (Float.parseFloat(this.txtCantidad.getText()) > 0) {
-            this.registrarRetiro();
+            this.registrarTransferencia();
         } else {
             JOptionPane.showMessageDialog(
                     this,
@@ -437,11 +390,6 @@ public class FrmRetiros extends javax.swing.JFrame {
         this.operacion = false;
     }//GEN-LAST:event_btnRestarActionPerformed
 
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn100;
     private javax.swing.JButton btn1000;
@@ -454,15 +402,14 @@ public class FrmRetiros extends javax.swing.JFrame {
     private javax.swing.JButton btnRestar;
     private javax.swing.JButton btnSumar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtFolio;
-    private javax.swing.JTextField txtNumTarjeta;
+    private javax.swing.JTextField txtTarjetaDestino;
+    private javax.swing.JTextField txtTarjetaOrigen;
     // End of variables declaration//GEN-END:variables
+
 }

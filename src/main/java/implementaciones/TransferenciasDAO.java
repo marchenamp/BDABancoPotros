@@ -11,16 +11,20 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author march
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
-public class TransferenciasDAO implements ITransferenciasDAO{
+public class TransferenciasDAO implements ITransferenciasDAO {
 
     private static final Logger LOG = Logger.getLogger(TransferenciasDAO.class.getName());
     private final IConexionBD generadorConexiones;
 
+    /**
+     * Método constructor que crea la conexión con la base de datos.
+     *
+     * @param generadorConexiones Parámetro que genera la base de datos.
+     */
     public TransferenciasDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
-    
-    
+
 }
