@@ -12,6 +12,7 @@ import interfaces.ICuentasDAO;
 import interfaces.IDireccionesClientesDAO;
 import interfaces.IRetirosDAO;
 import interfaces.ITransferenciasDAO;
+import java.awt.event.KeyEvent;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -41,6 +42,7 @@ public class FrmRealizarRetiro extends javax.swing.JFrame {
         this.folio = null;
         this.contraseña = null;
         initComponents();
+        this.lblOcultar.setVisible(false);
     }
 
     public void consultarFormulario() {
@@ -89,78 +91,164 @@ public class FrmRealizarRetiro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtFolio = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
         btnRealizar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtFolio = new javax.swing.JTextField();
+        txtContraseña = new javax.swing.JPasswordField();
+        lblVer = new javax.swing.JLabel();
+        lblOcultar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Folio:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
-
-        jLabel2.setText("Contraseña:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
-        jPanel1.add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 110, -1));
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 110, -1));
-
+        btnRealizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRealizar.setText("Realizar");
         btnRealizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRealizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRealizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+        jPanel1.add(btnRealizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 90, 30));
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 100, 30));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel5.setText("Retirar Saldo");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, 30));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Folio:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Contraseña:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+
+        txtFolio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFolio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFolioActionPerformed(evt);
+            }
+        });
+        txtFolio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFolioKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 120, -1));
+
+        txtContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 120, -1));
+
+        lblVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver.png"))); // NOI18N
+        lblVer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVerMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
+
+        lblOcultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ocultar.png"))); // NOI18N
+        lblOcultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOcultarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarActionPerformed
         this.realizarRetiro();
     }//GEN-LAST:event_btnRealizarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-         int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea regresar a la pantalla de inicio?", "REGRESAR", JOptionPane.YES_NO_OPTION);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
-            inicio.setVisible(true);
-            this.dispose();
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        inicio.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFolioActionPerformed
+
+    private void lblOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOcultarMouseClicked
+        // TODO add your handling code here:
+        lblVer.setVisible(true);
+        lblOcultar.setVisible(false);
+        txtContraseña.setEchoChar('•');
+    }//GEN-LAST:event_lblOcultarMouseClicked
+
+    private void lblVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerMouseClicked
+        // TODO add your handling code here:
+         lblVer.setVisible(false);
+        lblOcultar.setVisible(true);
+        txtContraseña.setEchoChar((char) 0);
+    }//GEN-LAST:event_lblVerMouseClicked
+
+    private void txtFolioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFolioKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            txtFolio.transferFocus();
         }
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_txtFolioKeyPressed
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            realizarRetiro();
+            txtFolio.requestFocus();
+        }
+    }//GEN-LAST:event_txtContraseñaKeyPressed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRealizar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JLabel lblOcultar;
+    private javax.swing.JLabel lblVer;
+    private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtFolio;
     // End of variables declaration//GEN-END:variables
 }

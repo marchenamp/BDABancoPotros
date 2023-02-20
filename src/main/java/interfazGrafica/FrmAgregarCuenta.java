@@ -177,7 +177,7 @@ public class FrmAgregarCuenta extends javax.swing.JFrame {
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 200, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
         jLabel5.setText("Datos generados para tu cuenta");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, 20));
 
@@ -243,7 +243,7 @@ public class FrmAgregarCuenta extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea cancelar?", "CANCELAR", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar?", "CANCELAR", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
             FrmCuentas cuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
             cuentas.setVisible(true);

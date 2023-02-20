@@ -63,14 +63,17 @@ public class FrmBanco extends javax.swing.JFrame {
         lblNumeroCuenta = new javax.swing.JLabel();
         btnTransferir = new javax.swing.JButton();
         btnRetirar = new javax.swing.JButton();
-        btnMovimientos = new javax.swing.JButton();
-        btnCerrarSesion = new javax.swing.JButton();
+        btnInicio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -81,21 +84,22 @@ public class FrmBanco extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(0, 153, 255));
+        lblNombre.setForeground(new java.awt.Color(0, 102, 255));
         lblNombre.setText("Nombre Cliente");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 190, 40));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 190, 40));
 
         lblSaldo.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lblSaldo.setText("$ 0.00");
-        jPanel1.add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 110, 40));
+        jPanel1.add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 110, 40));
 
+        lblNumeroCuenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNumeroCuenta.setText("*1234");
-        jPanel1.add(lblNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 50, 30));
+        jPanel1.add(lblNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 50, 30));
 
         btnTransferir.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnTransferir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/transferir.png"))); // NOI18N
         btnTransferir.setText(" Transferir");
-        jPanel1.add(btnTransferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 150, -1));
+        jPanel1.add(btnTransferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 150, -1));
 
         btnRetirar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnRetirar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retirar.png"))); // NOI18N
@@ -105,21 +109,16 @@ public class FrmBanco extends javax.swing.JFrame {
                 btnRetirarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 150, -1));
+        jPanel1.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 150, -1));
 
-        btnMovimientos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        btnMovimientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/movimientos.png"))); // NOI18N
-        btnMovimientos.setText(" Ver movimientos");
-        jPanel1.add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 190, -1));
-
-        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
-        btnCerrarSesion.setText("Cerrar Sesión");
-        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnInicio.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
+        btnInicio.setText("Volver a inicio");
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesionActionPerformed(evt);
+                btnInicioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 130, -1));
+        jPanel1.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 130, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,36 +133,59 @@ public class FrmBanco extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 390, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, 270));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Saldo disponible");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Cuenta");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tarjeta.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 620));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 340, 270));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setText("Retiros");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setText("Transferencias");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 620));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea cerrar sesión?", "CERRAR SESIÓN", JOptionPane.YES_NO_OPTION);
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea volver a Inicio?", "VOLVER A INICIO", JOptionPane.YES_NO_OPTION);
         if (respuesta == 0) {
-            FrmCuentas cuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
-            cuentas.setVisible(true);
+            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            inicio.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+    }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
         FrmRetiro retiro = new FrmRetiro(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
@@ -173,17 +195,20 @@ public class FrmBanco extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnMovimientos;
+    private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnTransferir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNumeroCuenta;
     private javax.swing.JLabel lblSaldo;

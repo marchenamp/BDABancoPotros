@@ -91,9 +91,9 @@ public class FrmDepositar extends javax.swing.JFrame {
         btnSumar = new javax.swing.JButton();
         btnRestar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtNumeroTarjeta = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,89 +101,89 @@ public class FrmDepositar extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn50.setForeground(new java.awt.Color(0, 153, 255));
+        btn50.setForeground(new java.awt.Color(0, 102, 255));
         btn50.setText("$ 50");
         btn50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn50ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn50, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, 40));
+        jPanel1.add(btn50, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 90, 50));
 
         btn100.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn100.setForeground(new java.awt.Color(0, 153, 255));
+        btn100.setForeground(new java.awt.Color(0, 102, 255));
         btn100.setText("$ 100");
         btn100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn100ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn100, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 80, 40));
+        jPanel1.add(btn100, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 90, 50));
 
         btn200.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn200.setForeground(new java.awt.Color(0, 153, 255));
+        btn200.setForeground(new java.awt.Color(0, 102, 255));
         btn200.setText("$ 200");
         btn200.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn200ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn200, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 80, 40));
+        jPanel1.add(btn200, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 90, 50));
 
         btn500.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn500.setForeground(new java.awt.Color(0, 153, 255));
+        btn500.setForeground(new java.awt.Color(0, 102, 255));
         btn500.setText("$ 500");
         btn500.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn500ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 90, 40));
+        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 90, 50));
 
         btn1000.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn1000.setForeground(new java.awt.Color(0, 153, 255));
+        btn1000.setForeground(new java.awt.Color(0, 102, 255));
         btn1000.setText("$ 1000");
         btn1000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn1000ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, 40));
+        jPanel1.add(btn1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 90, 50));
 
         btn2000.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn2000.setForeground(new java.awt.Color(0, 153, 255));
+        btn2000.setForeground(new java.awt.Color(0, 102, 255));
         btn2000.setText("$ 2000");
         btn2000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn2000ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn2000, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, 40));
+        jPanel1.add(btn2000, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 90, 50));
 
-        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 100, -1));
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 80, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Saldo a depositar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Número de cuenta");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
 
-        btnAgregar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 100, 30));
 
-        btnCancelar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        btnCancelar.setText("Regresar");
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 100, 30));
 
         btnSumar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSumar.setText("Sumar");
@@ -192,7 +192,7 @@ public class FrmDepositar extends javax.swing.JFrame {
                 btnSumarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 90, 50));
+        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 100, 30));
 
         btnRestar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRestar.setText("Restar");
@@ -201,34 +201,42 @@ public class FrmDepositar extends javax.swing.JFrame {
                 btnRestarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 90, 50));
+        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 100, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Seleccione la cantidad");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel5.setText("Depósito de Saldo");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Número de Tarjeta");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
-        jPanel1.add(txtNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 140, -1));
+        txtNumeroTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroTarjetaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 130, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Saldo a depositar");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn50ActionPerformed
@@ -322,7 +330,7 @@ public class FrmDepositar extends javax.swing.JFrame {
     }//GEN-LAST:event_btn2000ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea regresar?", "REGRESAR", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cancelar?", "CANCELAR DEPÓSITO", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
             FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
             inicio.setVisible(true);
@@ -345,6 +353,10 @@ public class FrmDepositar extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    private void txtNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroTarjetaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn100;
@@ -360,7 +372,7 @@ public class FrmDepositar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtNumeroTarjeta;

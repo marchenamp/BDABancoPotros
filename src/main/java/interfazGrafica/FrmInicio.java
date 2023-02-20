@@ -111,25 +111,25 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setText("Usuario:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
             }
         });
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 130, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 130, -1));
 
         txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContraseñaKeyPressed(evt);
             }
         });
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 130, -1));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 130, -1));
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnEntrar.setText("Entrar");
@@ -138,17 +138,17 @@ public class FrmInicio extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 100, 30));
+        jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 100, 30));
 
         btnRetiroSinCuenta.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        btnRetiroSinCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retirar.png"))); // NOI18N
         btnRetiroSinCuenta.setText("Hacer retiro sin cuenta");
-        btnRetiroSinCuenta.setBorderPainted(false);
         btnRetiroSinCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetiroSinCuentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRetiroSinCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 170, 30));
+        jPanel1.add(btnRetiroSinCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, 50));
 
         btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnRegistrarse.setText("Regístrate");
@@ -160,7 +160,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 110, 30));
 
         jLabel4.setText("¿No estás registrado?");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
@@ -171,7 +171,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 lblOcultarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+        jPanel1.add(lblOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         lblVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver.png"))); // NOI18N
         lblVer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,15 +179,17 @@ public class FrmInicio extends javax.swing.JFrame {
                 lblVerMouseClicked(evt);
             }
         });
-        jPanel1.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+        jPanel1.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
+        btnRetiro.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        btnRetiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Deposito.png"))); // NOI18N
         btnRetiro.setText("Hacer depósito");
         btnRetiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetiroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
+        jPanel1.add(btnRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 190, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
