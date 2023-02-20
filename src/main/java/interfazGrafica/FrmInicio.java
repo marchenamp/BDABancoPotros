@@ -93,12 +93,13 @@ public class FrmInicio extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRetiroSinCuenta = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblOcultar = new javax.swing.JLabel();
         lblVer = new javax.swing.JLabel();
+        btnRetiro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 605));
@@ -139,10 +140,15 @@ public class FrmInicio extends javax.swing.JFrame {
         });
         jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 100, 30));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        jButton2.setText("Hacer retiro sin cuenta");
-        jButton2.setBorderPainted(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 170, 30));
+        btnRetiroSinCuenta.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        btnRetiroSinCuenta.setText("Hacer retiro sin cuenta");
+        btnRetiroSinCuenta.setBorderPainted(false);
+        btnRetiroSinCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetiroSinCuentaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRetiroSinCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 170, 30));
 
         btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnRegistrarse.setText("Regístrate");
@@ -174,6 +180,14 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+
+        btnRetiro.setText("Hacer depósito");
+        btnRetiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetiroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,10 +283,23 @@ public class FrmInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
+    private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
+        FrmDepositar deposito = new FrmDepositar(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        deposito.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRetiroActionPerformed
+
+    private void btnRetiroSinCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroSinCuentaActionPerformed
+        FrmRealizarRetiro retiro = new FrmRealizarRetiro(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        retiro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRetiroSinCuentaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRegistrarse;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRetiro;
+    private javax.swing.JButton btnRetiroSinCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

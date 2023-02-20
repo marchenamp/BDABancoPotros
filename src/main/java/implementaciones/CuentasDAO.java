@@ -87,9 +87,7 @@ public class CuentasDAO implements ICuentasDAO {
             throw new PersistenciaException("No fue posible registrar al cliente");
         }
     }
-    
-    
-    
+
     @Override
     public void rellenarComboCuentas(String columna, JComboBox combo) {
         String codigoSQL = "select * from cuentas";
@@ -98,7 +96,7 @@ public class CuentasDAO implements ICuentasDAO {
             Connection conexion = generadorConexiones.crearConexion();
             statement = conexion.createStatement();
             ResultSet resultado = statement.executeQuery(codigoSQL);
-            while(resultado.next()){
+            while (resultado.next()) {
                 String numeroCuenta = resultado.getString(columna);
                 combo.addItem(numeroCuenta);
             }
@@ -109,10 +107,10 @@ public class CuentasDAO implements ICuentasDAO {
     }
 
     @Override
-    public void sumarSaldo(String numCuenta, float cantidad) throws PersistenciaException{
+    public void sumarSaldo(String numCuenta, float cantidad) throws PersistenciaException {
         String codigoSQL = "update cuentas "
-                         + "set saldo = saldo + ? "
-                         + "where numeroCuenta = ?";
+                + "set saldo = saldo + ? "
+                + "where numeroCuenta = ?";
         try (Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(
                 codigoSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setFloat(1, cantidad);

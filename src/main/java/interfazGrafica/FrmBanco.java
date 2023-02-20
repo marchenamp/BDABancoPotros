@@ -18,9 +18,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author 
- * Misael Marchena - 233418
- * Magda Ramírez - 233523
+ * @author Misael Marchena - 233418 Magda Ramírez - 233523
  */
 public class FrmBanco extends javax.swing.JFrame {
 
@@ -32,7 +30,7 @@ public class FrmBanco extends javax.swing.JFrame {
     private final ITransferenciasDAO transferenciasDAO;
     private final Cliente clienteSesion;
     private final Cuenta cuentaIniciada;
-    
+
     public FrmBanco(Cuenta cuentaIniciada, Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
@@ -66,7 +64,7 @@ public class FrmBanco extends javax.swing.JFrame {
         btnTransferir = new javax.swing.JButton();
         btnRetirar = new javax.swing.JButton();
         btnMovimientos = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -102,6 +100,11 @@ public class FrmBanco extends javax.swing.JFrame {
         btnRetirar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnRetirar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retirar.png"))); // NOI18N
         btnRetirar.setText(" Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 150, -1));
 
         btnMovimientos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -109,14 +112,14 @@ public class FrmBanco extends javax.swing.JFrame {
         btnMovimientos.setText(" Ver movimientos");
         jPanel1.add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 190, -1));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
-        jButton4.setText("Cerrar Sesión");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 130, -1));
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,20 +156,27 @@ public class FrmBanco extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this,"¿Desea cerrar sesión?", "CERRAR SESIÓN", JOptionPane.YES_NO_OPTION);
-        if(respuesta ==0){
-            System.exit(0);
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea cerrar sesión?", "CERRAR SESIÓN", JOptionPane.YES_NO_OPTION);
+        if (respuesta == 0) {
+            FrmCuentas cuentas = new FrmCuentas(clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            cuentas.setVisible(true);
+            this.dispose();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        FrmRetiro retiro = new FrmRetiro(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        retiro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnMovimientos;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnTransferir;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

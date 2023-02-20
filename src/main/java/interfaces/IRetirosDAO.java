@@ -4,10 +4,16 @@
  */
 package interfaces;
 
+import dominio.Cuenta;
+import dominio.Retiro;
+import excepciones.PersistenciaException;
+
 /**
  *
  * @author march
  */
 public interface IRetirosDAO {
-    
+    Retiro consultar(String folio, String contraseña); 
+    Retiro insertar(Retiro retiro) throws PersistenciaException;
+    void retirarDinero(float cantidad, String numCuenta) throws PersistenciaException;
 }

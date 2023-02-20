@@ -25,6 +25,12 @@ public class Transferencia {
         this.idCuentaOrigen = idCuentaOrigen;
         this.idCuentaDestino = idCuentaDestino;
     }
+    
+    public Transferencia(float cantidad, Integer idCuentaOrigen, Integer idCuentaDestino) {
+        this.cantidad = cantidad;
+        this.idCuentaOrigen = idCuentaOrigen;
+        this.idCuentaDestino = idCuentaDestino;
+    }
 
     public Integer getIdTransferencia() {
         return idTransferencia;

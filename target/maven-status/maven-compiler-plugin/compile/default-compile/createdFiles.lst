@@ -9,6 +9,7 @@ dominio\DireccionesClientes.class
 interfazGrafica\FrmDepositar.class
 implementaciones\DireccionesClientesDAO.class
 interfaces\ITransferenciasDAO.class
+interfazGrafica\FrmInicio$7.class
 interfazGrafica\FrmAgregarCuenta$1.class
 implementaciones\ClientesDAO.class
 interfazGrafica\FrmRegistroCliente$12.class
@@ -45,14 +46,12 @@ interfazGrafica\FrmInicio$2.class
 interfazGrafica\FrmInicio$5.class
 interfazGrafica\FrmDepositar$3.class
 implementaciones\TransferenciasDAO.class
-.netbeans_automatic_build
 interfazGrafica\FrmCuentas.class
 dominio\Transferencia.class
 interfazGrafica\FrmRegistroCliente$5.class
 interfazGrafica\FrmDepositar$4.class
 interfazGrafica\FrmRegistroCliente$8.class
 interfazGrafica\FrmCuentas$2.class
-interfazGrafica\FrmBanco$2.class
 dominio\Cliente.class
 interfazGrafica\FrmRegistroCliente$10.class
 interfaces\IConexionBD.class

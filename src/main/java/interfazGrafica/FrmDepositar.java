@@ -4,8 +4,6 @@
  */
 package interfazGrafica;
 
-import dominio.Cliente;
-import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import interfaces.IClientesDAO;
 import interfaces.ICuentasDAO;
@@ -27,12 +25,10 @@ public class FrmDepositar extends javax.swing.JFrame {
     private final ICuentasDAO cuentasDAO;
     private final IRetirosDAO retirosDAO;
     private final ITransferenciasDAO transferenciasDAO;
-    private final Cliente clienteSesion;
-    private final Cuenta cuentaIniciada;
     private float cantidadAgregada;
     private boolean operacion;
 
-    public FrmDepositar(Cuenta cuentaIniciada, Cliente clienteSesion, IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
+    public FrmDepositar(IClientesDAO clientesDAO, IDireccionesClientesDAO direccionesClientesDAO, ICuentasDAO cuentasDAO, IRetirosDAO retirosDAO, ITransferenciasDAO transferenciasDAO) {
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/multimedia/iconCaballoPerfil.png"));
 //        this.setIconImage(icon.getImage());
         this.setTitle("BANCO POTROS");
@@ -41,8 +37,6 @@ public class FrmDepositar extends javax.swing.JFrame {
         this.cuentasDAO = cuentasDAO;
         this.retirosDAO = retirosDAO;
         this.transferenciasDAO = transferenciasDAO;
-        this.clienteSesion = clienteSesion;
-        this.cuentaIniciada = cuentaIniciada;
         this.cantidadAgregada = 0f;
         this.operacion = true;
         initComponents();
@@ -51,8 +45,7 @@ public class FrmDepositar extends javax.swing.JFrame {
 
     public void agregarDinero() {
         try {
-            this.cuentasDAO.sumarSaldo(this.cuentaIniciada.getNumeroCuenta(), cantidadAgregada);
-            this.cuentaIniciada.setSaldo(this.cuentaIniciada.getSaldo() + this.cantidadAgregada);
+            this.cuentasDAO.sumarSaldo(this.txtNumeroTarjeta.getText(), cantidadAgregada);
             this.mostrarMensajeDineroAgregado();
         } catch (PersistenciaException e) {
             this.mostrarMensajeErrorAlAgregar();
@@ -98,8 +91,9 @@ public class FrmDepositar extends javax.swing.JFrame {
         btnSumar = new javax.swing.JButton();
         btnRestar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnOtraCantidad = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNumeroTarjeta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,7 +138,7 @@ public class FrmDepositar extends javax.swing.JFrame {
                 btn500ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 80, 40));
+        jPanel1.add(btn500, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 90, 40));
 
         btn1000.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn1000.setForeground(new java.awt.Color(0, 153, 255));
@@ -167,11 +161,11 @@ public class FrmDepositar extends javax.swing.JFrame {
         jPanel1.add(btn2000, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, 40));
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 100, -1));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 100, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Saldo a depositar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -198,7 +192,7 @@ public class FrmDepositar extends javax.swing.JFrame {
                 btnSumarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 80, 30));
+        jPanel1.add(btnSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 90, 50));
 
         btnRestar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRestar.setText("Restar");
@@ -207,18 +201,19 @@ public class FrmDepositar extends javax.swing.JFrame {
                 btnRestarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 80, 30));
+        jPanel1.add(btnRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 90, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/potros-itson-chico.jpg"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        btnOtraCantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnOtraCantidad.setText("Otra cantidad");
-        jPanel1.add(btnOtraCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, 30));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Seleccione la cantidad");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Número de Tarjeta");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
+        jPanel1.add(txtNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,8 +324,8 @@ public class FrmDepositar extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea regresar?", "REGRESAR", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            FrmBanco banco = new FrmBanco(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
-            banco.setVisible(true);
+            FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+            inicio.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -345,8 +340,8 @@ public class FrmDepositar extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         this.agregarDinero();
-        FrmBanco banco = new FrmBanco(cuentaIniciada, clienteSesion, clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
-        banco.setVisible(true);
+        FrmInicio inicio = new FrmInicio(clientesDAO, direccionesClientesDAO, cuentasDAO, retirosDAO, transferenciasDAO);
+        inicio.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -360,13 +355,14 @@ public class FrmDepositar extends javax.swing.JFrame {
     private javax.swing.JButton btn500;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnOtraCantidad;
     private javax.swing.JButton btnRestar;
     private javax.swing.JButton btnSumar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
 }

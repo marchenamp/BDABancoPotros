@@ -15,14 +15,25 @@ import java.util.Objects;
 public class Retiro {
     private String folio;
     private String contraseña;
+    private float cantidad;
     private Date fechaHoraRealizacion;
-    private Integer idCuentaOrigen;
+    private String numCuentaOrigen;
 
-    public Retiro(String folio, String contraseña, Date fechaHoraRealizacion, Integer idCuentaOrigen) {
+    public Retiro(String folio, String contraseña, float cantidad, Date fechaHoraRealizacion, String numCuentaOrigen) {
         this.folio = folio;
         this.contraseña = contraseña;
+        this.cantidad = cantidad;
         this.fechaHoraRealizacion = fechaHoraRealizacion;
-        this.idCuentaOrigen = idCuentaOrigen;
+        this.numCuentaOrigen = numCuentaOrigen;
+        
+    }
+    
+    public Retiro(String folio, String contraseña, float cantidad, String numCuentaOrigen) {
+        this.folio = folio;
+        this.contraseña = contraseña;
+        this.cantidad = cantidad;
+        this.numCuentaOrigen = numCuentaOrigen;
+        
     }
 
     public String getFolio() {
@@ -49,14 +60,23 @@ public class Retiro {
         this.fechaHoraRealizacion = fechaHoraRealizacion;
     }
 
-    public Integer getIdCuentaOrigen() {
-        return idCuentaOrigen;
+    public String getNumCuentaOrigen() {
+        return numCuentaOrigen;
     }
 
-    public void setIdCuentaOrigen(Integer idCuentaOrigen) {
-        this.idCuentaOrigen = idCuentaOrigen;
+    public void setIdCuentaOrigen(String numCuentaOrigen) {
+        this.numCuentaOrigen = numCuentaOrigen;
     }
 
+    public float getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(float cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
